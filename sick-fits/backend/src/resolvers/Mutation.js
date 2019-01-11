@@ -1,12 +1,26 @@
 const mutations = {
-  createDog(parent, args, ctx, info) {
-    global.dogs = global.dogs || [];
+  async createItem(parent, args, ctx, info) {
+    // TODO: Check if they are logged in
 
-    // Create a Dog
-    const newDog = { name: args.name };
-    global.dogs.push(newDog);
-    return newDog;
+    const item = await ctx.db.mutation.createItem(
+      {
+        data: {
+          ...args
+        }
+      },
+      info
+    );
+
+    return item;
   }
+  // createDog(parent, args, ctx, info) {
+  //   global.dogs = global.dogs || [];
+
+  //   // Create a Dog
+  //   const newDog = { name: args.name };
+  //   global.dogs.push(newDog);
+  //   return newDog;
+  // }
 };
 
 module.exports = mutations;
