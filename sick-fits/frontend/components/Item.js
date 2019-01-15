@@ -29,7 +29,7 @@ class Item extends React.Component {
               pathname: '/item',
               query: { id: item.id }
             }}>
-            {item.title}
+            <a>{item.title}</a>
           </Link>
         </Title>
         <PriceTag>{formatMoney(item.price)}</PriceTag>
@@ -40,7 +40,7 @@ class Item extends React.Component {
               pathname: 'update',
               query: { id: item.id }
             }}>
-            Edit ✏️
+            <a>Edit ✏️</a>
           </Link>
           <button>Add To Cart</button>
           <button>Delete</button>
