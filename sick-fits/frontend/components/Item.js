@@ -5,6 +5,7 @@ import Title from '../components/styles/Title';
 import ItemStyles from '../components/styles/ItemStyles';
 import PriceTag from '../components/styles/PriceTag';
 import formatMoney from '../lib/formatMoney';
+import DeleteItem from './DeleteItem';
 
 class Item extends React.Component {
   static propTypes = {
@@ -34,7 +35,7 @@ class Item extends React.Component {
         </Title>
         <PriceTag>{formatMoney(item.price)}</PriceTag>
         <p>{item.description}</p>
-        <div className='buttonList'>
+        <div className="buttonList">
           <Link
             href={{
               pathname: 'update',
@@ -43,7 +44,7 @@ class Item extends React.Component {
             <a>Edit ✏️</a>
           </Link>
           <button>Add To Cart</button>
-          <button>Delete</button>
+          <DeleteItem id={item.id}>Delete This Item</DeleteItem>
         </div>
       </ItemStyles>
     );
