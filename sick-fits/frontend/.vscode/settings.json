@@ -4,6 +4,7 @@
     "titleBar.inactiveForeground": "#000000CC",
     "titleBar.activeBackground": "#FFC600",
     "titleBar.inactiveBackground": "#FFC600CC",
-    "statusBar.background": "#FFC600CC"
+    "statusBar.background": "#FFC600CC",
+    "statusBar.foreground": "#000000"
   }
 }
