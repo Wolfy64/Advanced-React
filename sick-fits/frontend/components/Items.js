@@ -37,7 +37,7 @@ class Items extends React.Component {
       <Center>
         <Pagination page={this.props.page} />
         <Query
-          fetchPolicy="network-only"
+          // fetchPolicy="network-only"
           query={ALL_ITEMS_QUERY}
           variables={{ skip: this.props.page * perPage - perPage }}>
           {({ data, error, loading }) => {
