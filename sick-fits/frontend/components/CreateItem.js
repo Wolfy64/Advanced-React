@@ -47,7 +47,6 @@ class CreateItem extends React.Component {
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'sickfits');
-    console.log(data);
 
     const res = await fetch(
       'https://api.cloudinary.com/v1_1/david-sickfits/image/upload',
