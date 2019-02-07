@@ -46,7 +46,7 @@ const mutations = {
     // lower their email
     args.email = args.email.toLowerCase();
     // hash their password
-    const password = await bcrypt.hash(args.email, 10);
+    const password = await bcrypt.hash(args.password, 10);
     // create the user in the database
     const user = await ctx.db.mutation.createUser(
       {
@@ -66,6 +66,24 @@ const mutations = {
       maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year cookie
     });
     // finalllly we return the user to the browser
+    return user;
+  },
+
+  async signin(parent, { email, password }, ctx, info) {
+    // 1. check if there is user with that email
+    const user = await ctx.db.query.user({ where: { email } });
+    if (!user) throw new Error(`No such user found for email: ${email}`);
+    // 2. check if their password is correct
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) throw new Error(`Invalid Password`);
+    // 3. generate the JWT Token
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    // 4. set the cookie withhe token
+    ctx.response.cookie('token', token, {
+      http: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year cookie
+    });
+    // 5. return the user
     return user;
   }
 };
